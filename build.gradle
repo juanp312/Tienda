@@ -22,18 +22,8 @@ configurations {
 repositories {
 	mavenCentral()
 
-	maven {
-    url 'https://pkgs.dev.azure.com/kevinarciniegas/974019b3-9772-481d-8768-f49329b3257c/_packaging/feed/maven/v1'
-    name 'feed'
-	credentials(HttpHeaderCredentials) {
-            name = "Private-Token"
-            value = "vqmh63c7gtjjs7of42k6lnaocth4rhsl54dej5ph4knp6idtpsfa"
-        }
-    authentication {
-        header(HttpHeaderAuthentication)
-    }
  }
-}
+
 
 
 
@@ -55,25 +45,7 @@ dependencies {
     testImplementation 'org.powermock:powermock-module-junit4:1.6.4'
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            artifact("build/libs/AdnCeiba-0.0.1.jar") {
-                extension 'jar'
-            }
-        }
-    }
-    repositories {
-        maven {
-			url 'https://pkgs.dev.azure.com/kevinarciniegas/ProyectoTienda/_packaging/feed/maven/v1'
-			credentials { 
-				username "Azure DevOps Services" 
-				//The Azure DevOps Services build system will use the "SYSTEM_ACCESSTOKEN" to authenticate to Azure DevOps Services feeds 
-				password System.getenv("AZURE_ARTIFACTS_ENV_ACCESS_TOKEN") != null ? System.getenv("AZURE_ARTIFACTS_ENV_ACCESS_TOKEN") : vstsMavenAccessToken 
-    		}   
-		}
-	}
-}
+
 test {
 	finalizedBy jacocoTestReport
 }
